@@ -55,6 +55,15 @@ app.post("/blogs", function(req, res){
 });
 
 
+//SHOW BLOG POST
+app.get("/blogs/:id", function(req, res){
+	Blog.findById(req.params.id, function(err, foundBlog){
+		if(err){ res.redirect("/blogs") }
+		else{ res.render("show", {blog: foundBlog}) }
+	})
+});
+
+
 //Tell Express to listen for request
 app.listen(process.env.PORT || 3000, process.env.IP, function(){
 console.log("Started server");
